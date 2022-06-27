@@ -10,7 +10,7 @@ from components.ui import create_figure
 from components.ui import NavBar, Body
 
 
-class DashWorker(L.LightningWork):
+class UserInterfaceWorker(L.LightningWork):
     def run(self):
         app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
         app.layout = html.Div(
@@ -45,17 +45,17 @@ class DashWorker(L.LightningWork):
         app.run_server(host=self.host, port=self.port)
 
 
-class DashFlow(L.LightningFlow):
+class RootFlow(L.LightningFlow):
     def __init__(self):
         super().__init__()
-        self.lit_dash = DashWorker(parallel=True)
+        self.uiw = UserInterfaceWorker(parallel=True)
 
     def run(self):
-        self.lit_dash.run()
+        self.uiw.run()
 
     def configure_layout(self):
-        tab1 = {"name": "home", "content": self.lit_dash}
+        tab1 = {"name": "home", "content": self.uiw}
         return tab1
 
 
-app = L.LightningApp(DashFlow())
+app = L.LightningApp(RootFlow())
