@@ -36,7 +36,7 @@ setup(
         "dash-bootstrap-components",
         "optuna",
         "hydra-core",
-        "torch-tb-profilers",
+        "torch-tb-profiler",
     ],
     packages=find_packages(),
     zip_safe=False,
