@@ -1,22 +1,18 @@
 import os
 import torch
 import hydra
-from pathlib import Path
 from torch.utils.data import TensorDataset
 from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-from lightning_pod.pipeline.datamodule import LitDataModule
-from lightning_pod.agents.module import LitModel
-from lightning_pod.utils.paths import create_target_path
-from lightning_pod.conf import PROJECT_NAME
+from network.pipeline.datamodule import LitDataModule
+from network.module import LitModel
 
 
 # SET PATHS
-filepath = Path(__file__)
-PROJECTPATH = create_target_path(filepath, PROJECT_NAME)
-AGENTSPATH = create_target_path(filepath, "agents")
+PROJECTPATH = os.getcwd()
+AGENTSPATH = os.path.join(PROJECTPATH, "network")
 
 
 @hydra.main(

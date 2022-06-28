@@ -2,6 +2,9 @@ import os
 import click
 import shutil
 from pathlib import Path
+from textual.app import App
+from textual.widgets import DirectoryTree, ScrollView
+from lightning_pod.cli.tui import inspect_tree
 
 
 PROJECTPATH = os.getcwd()
@@ -16,7 +19,16 @@ def main():
 
 @main.command("seed")
 def seed():
-    shutil.copytree(SEEDPATH, PROJECTPATH)
+    # shutil.copytree(SEEDPATH, PROJECTPATH)
+    seed_dir = os.listdir(SEEDPATH)
+    for src in seed_dir:
+        if src != "__pycache__":
+            srcpath = os.path.join(SEEDPATH, src)
+            destpath = os.path.join(PROJECTPATH, src)
+            if os.path.isdir(srcpath):
+                shutil.copytree(srcpath, destpath)
+            else:
+                shutil.copy(srcpath, destpath)
     return
 
 
@@ -51,10 +63,9 @@ def teardown():
 
 
 # TODO add help description
-@project.command("build")
+@project.command("build", hidden=True)
 def build():
-    make_new()
-    return
+    pass
 
 
 @main.group("trainer")

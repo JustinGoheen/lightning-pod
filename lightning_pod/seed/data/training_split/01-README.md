@@ -1,0 +1,1 @@
+The data directory for the data training split made by the trainer will be saved here as .pt files
