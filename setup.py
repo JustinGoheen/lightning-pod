@@ -4,11 +4,19 @@ from pathlib import Path
 
 console_scripts = """
 [console_scripts]
-pod=lightning_pod.cli.pod:main
+pod=lightning_pod.cli.main:main
 """
 
 rootdir = Path(__file__).parent
 long_description = (rootdir / "README.md").read_text()
+
+requirements = [
+    "click==8.1.3",
+    "textual==0.1.18",
+    "rich-cli==1.8.0",
+    "colorama==0.4.5",
+    "tabulate==0.8.10",
+]
 
 setup(
     name="lightning-pod",
@@ -20,24 +28,7 @@ setup(
     author="Justin Goheen",
     author_email="",
     license="Apache 2.0",
-    install_requires=[
-        "lightning",
-        "lightning-grid",
-        "pytorch_lightning",
-        "torchvision",
-        "dearpygui",
-        "click",
-        "textual",
-        "rich-cli",
-        "colorama",
-        "tabulate",
-        "plotly",
-        "dash",
-        "dash-bootstrap-components",
-        "optuna",
-        "hydra-core",
-        "torch-tb-profiler",
-    ],
+    install_requires=requirements,
     packages=find_packages(),
     zip_safe=False,
     classifiers=[
