@@ -13,8 +13,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from torch.utils.data import TensorDataset
 
-from lightning.app.testing.helpers import EmptyWork
-
 
 @dataclass
 class Data:
