@@ -96,9 +96,10 @@ zero_idx = find_index(ground_truths, label=0, label_idx=1)
 
 ## model summary ##
 chkptdir = os.path.join("models", "checkpoints")
-avialable_checkpoints = os.listdir(chkptdir)
-latest_checkpoint = avialable_checkpoints[0]
-chkpt_fname = os.path.join("models", "checkpoints", latest_checkpoint)
+available_checkpoints = os.listdir(chkptdir)
+available_checkpoints.remove("README.md")
+latest_checkpoint = available_checkpoints[0]
+chkpt_fname = os.path.join("models", "checkpoints", "model.ckpt")
 model = LitModel.load_from_checkpoint(chkpt_fname)
 summary = ModelSummary(model)
 model_layers, model_params = make_model_summary(summary)
